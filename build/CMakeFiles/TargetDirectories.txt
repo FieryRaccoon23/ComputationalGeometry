@@ -1,3 +1,0 @@
-/home/araib/ComputationalGeometry/build/CMakeFiles/app.dir
-/home/araib/ComputationalGeometry/build/CMakeFiles/edit_cache.dir
-/home/araib/ComputationalGeometry/build/CMakeFiles/rebuild_cache.dir

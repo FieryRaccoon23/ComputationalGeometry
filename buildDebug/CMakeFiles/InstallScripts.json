@@ -1,7 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/home/araib/ComputationalGeometry/buildDebug/cmake_install.cmake"
-	],
-	"Parallel" : false
-}
