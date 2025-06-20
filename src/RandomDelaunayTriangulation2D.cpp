@@ -12,7 +12,7 @@ typedef K::Point_2 Point_2;
 typedef CGAL::Delaunay_triangulation_2<K> Delaunay;
 
 int main() {
-    std::ofstream out("delaunay.msh");
+    std::ofstream out("delaunay2D.msh");
     if (!out) {
         std::cerr << "Cannot open output file.\n";
         return 1;
@@ -70,6 +70,6 @@ int main() {
     out << "$EndElements\n";
 
     out.close();
-    std::cout << "Delaunay triangulation written to delaunay.msh\n";
+    std::cout << "Delaunay triangulation written to delaunay2D.msh\n";
     return 0;
 }
