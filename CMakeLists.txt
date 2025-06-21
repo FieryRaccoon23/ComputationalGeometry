@@ -10,6 +10,12 @@ project( ComputationalGeometry LANGUAGES CXX CUDA)
 # set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
 # set(CMAKE_CUDA_FLAGS_DEBUG "-G -O0")
 
+#set directories
+set(BOOST_ROOT "${PROJECT_SOURCE_DIR}/libs/boost_1_88_0")
+set(CGAL_DIR "${PROJECT_SOURCE_DIR}/libs/CGAL-6.0.1")
+set(EIGEN3_INCLUDE_DIR "libs/eigen-3.4.0")
+set(TORCH_DIR "${PROJECT_SOURCE_DIR}/Pytorch/cuda12_8/libtorch")
+
 # CGAL and its components
 find_package( CGAL QUIET COMPONENTS  )
 
@@ -33,11 +39,9 @@ if ( NOT Boost_FOUND )
 endif()
 
 # include Eigen
-set(EIGEN3_INCLUDE_DIR "libs/eigen-3.4.0")
 include_directories(${EIGEN3_INCLUDE_DIR})
 
 # include libtorch
-set(TORCH_DIR "${PROJECT_SOURCE_DIR}/Pytorch/cuda12_8/libtorch")
 set(CMAKE_PREFIX_PATH "${TORCH_DIR}")
 find_package(Torch REQUIRED)
 
