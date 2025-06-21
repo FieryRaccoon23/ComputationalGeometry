@@ -36,6 +36,10 @@ endif()
 set(EIGEN3_INCLUDE_DIR "libs/eigen-3.4.0")
 include_directories(${EIGEN3_INCLUDE_DIR})
 
+# include libtorch
+set(TORCH_DIR "${PROJECT_SOURCE_DIR}/Pytorch/cuda12_8/libtorch")
+set(CMAKE_PREFIX_PATH "${TORCH_DIR}")
+find_package(Torch REQUIRED)
 
 # Creating entries for all C++ files with "main" routine
 # ##########################################################
@@ -71,6 +75,11 @@ target_include_directories(app PRIVATE ${Boost_INCLUDE_DIRS})
 
 # Link Eigen
 target_include_directories(app PRIVATE ${EIGEN3_INCLUDE_DIR})
+
+# Link libtorch
+target_include_directories(app PRIVATE ${TORCH_INCLUDE_DIRS})
+target_link_libraries(app "${TORCH_LIBRARIES}")
+set_property(TARGET app PROPERTY CXX_STANDARD 17)
 
 set_target_properties(app PROPERTIES
     CUDA_SEPARABLE_COMPILATION ON

@@ -7,6 +7,8 @@
 #include <cstdlib>
 #include <chrono>
 
+//#include <torch/torch.h>
+
 typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
 typedef K::Point_2 Point_2;
 typedef CGAL::Delaunay_triangulation_2<K> Delaunay;
@@ -71,5 +73,9 @@ int main() {
 
     out.close();
     std::cout << "Delaunay triangulation written to delaunay2D.msh\n";
+
+    // torch::Tensor t = torch::rand({2, 3});
+    // std::cout << t << std::endl;
+
     return 0;
 }
