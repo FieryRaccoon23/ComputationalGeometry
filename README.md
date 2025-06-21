@@ -11,4 +11,4 @@ Using CGAL to generate data and training to create Delaunay triangulation.
 
 This project is licensed under the CC BY-NC-ND 4.0 License.  
 You may not use it for commercial purposes or create derivative works.  
-See the [LICENSE](./LICENSE) file for more details.
+See the [LICENSE](./LICENSE.md) file for more details.
