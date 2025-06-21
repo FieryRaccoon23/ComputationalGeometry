@@ -6,3 +6,9 @@ Using CGAL to generate data and training to create Delaunay triangulation.
 2) Run ./make.sh to build
 3) Run the application in build folder by running ./build/app
 4) Cleanup build folder using the command ./clean_build.sh
+
+## License
+
+This project is licensed under the CC BY-NC-ND 4.0 License.  
+You may not use it for commercial purposes or create derivative works.  
+See the [LICENSE](./LICENSE) file for more details.
