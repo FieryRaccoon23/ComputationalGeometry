@@ -1,23 +1,9 @@
 #!/bin/bash
 
 # Destination directory
-DEST="/mnt/d/ComputationalGeometry/mesh"
+DEST="/mnt/d/ComputationalGeometry/data"
 
-# Check if at least one file is provided
-if [ $# -lt 1 ]; then
-  echo "Usage: $0 <file1> <file2> ... <fileN>"
-  exit 1
-fi
+cp -r data/csv "$DEST"
+cp -r data/mesh "$DEST"
 
-# Loop through all arguments
-for file in "$@"
-do
-  if [ -f "$file" ]; then
-    echo "Copying $file to $DEST"
-    cp "$file" "$DEST"
-  else
-    echo "Warning: '$file' does not exist or is not a regular file"
-  fi
-done
-
-echo "Done."
+echo "Copied data to windows drive."
