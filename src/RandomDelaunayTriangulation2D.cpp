@@ -18,7 +18,7 @@ typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
 typedef K::Point_2 Point_2;
 typedef CGAL::Delaunay_triangulation_2<K> Delaunay;
 
-void SaveDataToFiles(const std::map<Point_2, int>& point_ids, const std::set<std::pair<int, int>>& edges, int index)
+void SaveDataToFiles(const std::map<Point_2, int>& point_ids, const std::set<std::pair<int, int>>& edges, const std::vector<std::array<int, 3>>& triangles, int index)
 {
     std::string points_filename = std::string(CSV_DIR) + "points_" + std::to_string(index) + ".csv";
     std::ofstream points_file(points_filename);
@@ -35,6 +35,14 @@ void SaveDataToFiles(const std::map<Point_2, int>& point_ids, const std::set<std
         edges_file << e.first << "," << e.second << "\n";
     }
     edges_file.close();
+
+    std::string triangles_filename = std::string(CSV_DIR) + "triangles_" + std::to_string(index) + ".csv";
+    std::ofstream triangles_file(triangles_filename);
+    for (const auto& t : triangles) 
+    {
+        triangles_file << t[0] << "," << t[1]  << "," << t[2] << "\n";
+    }
+    triangles_file.close();
 }
 
 void GenerateDelaunayTriangulation(int index) 
@@ -115,7 +123,7 @@ void GenerateDelaunayTriangulation(int index)
     // torch::Tensor t = torch::rand({2, 3});
     // std::cout << t << std::endl;
 
-    SaveDataToFiles(point_ids, edges, index);
+    SaveDataToFiles(point_ids, edges, triangles, index);
 }
 
 int main()
