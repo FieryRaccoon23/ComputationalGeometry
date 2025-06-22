@@ -18,16 +18,18 @@ typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
 typedef K::Point_2 Point_2;
 typedef CGAL::Delaunay_triangulation_2<K> Delaunay;
 
-void SaveDataToFiles(const std::map<Point_2, int>& point_ids, const std::set<std::pair<int, int>>& edges)
+void SaveDataToFiles(const std::map<Point_2, int>& point_ids, const std::set<std::pair<int, int>>& edges, int index)
 {
-    std::ofstream points_file(std::string(CSV_DIR) +"points.csv");
+    std::string points_filename = std::string(CSV_DIR) + "points_" + std::to_string(index) + ".csv";
+    std::ofstream points_file(points_filename);
     for (const auto& p : point_ids) 
     {
         points_file << p.second << "," << p.first.x() << "," << p.first.y() << "\n";
     }
     points_file.close();
 
-    std::ofstream edges_file(std::string(CSV_DIR) +"edges.csv");
+    std::string edges_filename = std::string(CSV_DIR) + "edges_" + std::to_string(index) + ".csv";
+    std::ofstream edges_file(edges_filename);
     for (const auto& e : edges) 
     {
         edges_file << e.first << "," << e.second << "\n";
@@ -35,12 +37,13 @@ void SaveDataToFiles(const std::map<Point_2, int>& point_ids, const std::set<std
     edges_file.close();
 }
 
-int main() 
+void GenerateDelaunayTriangulation(int index) 
 {
-    std::ofstream out(std::string(MESH_DIR) + "delaunay2D.msh");
+    std::string filename = std::string(MESH_DIR) + "delaunay2D_" + std::to_string(index) + ".msh";
+    std::ofstream out(filename);            
     if (!out) {
         std::cerr << "Cannot open output file.\n";
-        return 1;
+        return;
     }
 
     const int n = 50;  // Number of points
@@ -112,7 +115,11 @@ int main()
     // torch::Tensor t = torch::rand({2, 3});
     // std::cout << t << std::endl;
 
-    SaveDataToFiles(point_ids, edges);
+    SaveDataToFiles(point_ids, edges, index);
+}
 
+int main()
+{
+    GenerateDelaunayTriangulation(0);
     return 0;
 }
