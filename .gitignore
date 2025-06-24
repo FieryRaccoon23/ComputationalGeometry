@@ -1,7 +1,10 @@
 /libs/
 /gmsh/
-/build/
-/buildDebug/
+/build_training/
+/build_inference/
+/buildDebug_training/
+/buildDebug_inference/
 /venv_cg/
 /Pytorch/
 /data/
+/model/

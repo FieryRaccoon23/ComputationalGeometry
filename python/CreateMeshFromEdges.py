@@ -31,3 +31,7 @@ with open(output_path, 'w') as f:
     f.write("$EndElements\n")
 
 print(f"Mesh file written to {output_path}")
+
+#BACKUP
+#save_path = os.path.join(model_dir, "point_transformer_edge_model.pt")
+#torch.save(model.state_dict(), save_path)

@@ -9,10 +9,12 @@
 
 #include <chrono>
 
-//#include <torch/torch.h>
+#include <torch/torch.h>
+#include <torch/script.h>
 
 #define MESH_DIR "./data/mesh/"
 #define CSV_DIR "./data/csv/"
+#define NUM_OF_POINTS 4
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
 typedef K::Point_2 Point_2;
@@ -54,7 +56,7 @@ void GenerateDelaunayTriangulation(int index)
         return;
     }
 
-    const int n = 50;  // Number of points
+    const int n = NUM_OF_POINTS;  // Number of points
     std::vector<Point_2> points;
     CGAL::Random_points_in_square_2<Point_2> gen(1.0);
 
@@ -126,8 +128,23 @@ void GenerateDelaunayTriangulation(int index)
     SaveDataToFiles(point_ids, edges, triangles, index);
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-    GenerateDelaunayTriangulation(0);
+    int numberOfDataFiles = 1;
+    if (argc >= 2) 
+    {
+        numberOfDataFiles = std::atoi(argv[1]);
+    }
+
+    std::cout << "Starting generation of triangles...\n";
+    auto start = std::chrono::high_resolution_clock::now();
+    for(int i = 0; i < numberOfDataFiles; ++i)
+    {   
+        GenerateDelaunayTriangulation(i);
+    }
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed = end - start;
+    std::cout << "Generating " << numberOfDataFiles << " number of data files took: "  << elapsed.count() << " seconds.\n";
+
     return 0;
 }
