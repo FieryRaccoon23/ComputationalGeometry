@@ -59,7 +59,7 @@ def main():
     model_path = "model/point_transformer_edge_model.pt"
     input_csv = "python/points_input.csv"
     output_msh = "python/generated_out_mesh.msh"
-    threshold = 0.7
+    threshold = 0.5
 
     # === Load model ===
     model = PointTransformModelDefinition.EdgePredictor()
