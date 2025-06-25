@@ -1,4 +1,4 @@
-# Delaunay triangulation using ML
+# Computational Geometry and ML
 Using CGAL to generate data and training to create Delaunay triangulation.
 
 ## Setup
@@ -11,7 +11,7 @@ Using CGAL to generate data and training to create Delaunay triangulation.
 7) Get PointTransformerLayer model: https://github.com/lucidrains/point-transformer-pytorch
 
 ## How to
-1) Run ./run_cmake to create make files (first parameter training/inference, second parameter release/debug)
+1) Run ./run_cmake "project name" to create make files (first parameter folder name like DelaunayTriangulation, second parameter is training/inference, third parameter release/debug)
 2) Run ./make.sh to build
 3) Run the application in build folder by running ./build_training/app
 4) Cleanup build folder using the command ./clean_build.sh and ./clean_data.sh to clean data folder

@@ -1,7 +1,8 @@
 #!/bin/bash
 
-BUILD_MODE=${1:-training}            # training (default) or inference
-BUILD_TYPE_INPUT=${2:-release}       # release (default) or debug
+FOLDER=${1:-}                        # e.g., DelaunayTriangulation
+BUILD_MODE=${2:-training}            # training (default) or inference
+BUILD_TYPE_INPUT=${3:-release}       # release (default) or debug
 
 # Normalize inputs
 BUILD_MODE=$(echo "$BUILD_MODE" | tr '[:upper:]' '[:lower:]')
@@ -9,9 +10,9 @@ BUILD_TYPE_INPUT=$(echo "$BUILD_TYPE_INPUT" | tr '[:upper:]' '[:lower:]')
 
 # Determine build folder
 if [[ "$BUILD_TYPE_INPUT" == "debug" ]]; then
-  BUILD_FOLDER="buildDebug_${BUILD_MODE}"
+  BUILD_FOLDER="buildDebug_${BUILD_MODE}/$FOLDER"
 else
-  BUILD_FOLDER="build_${BUILD_MODE}"
+  BUILD_FOLDER="build_${BUILD_MODE}/$FOLDER"
 fi
 
 echo "🏗️  Running make in: $BUILD_FOLDER"
