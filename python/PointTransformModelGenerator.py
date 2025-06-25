@@ -29,20 +29,26 @@ class EdgeDataset(torch.utils.data.Dataset):
         return len(self.point_files)
 
     def __getitem__(self, idx):
-        points = np.loadtxt(self.point_files[idx], delimiter=',')[:, 1:]  # skip index col
-        edges = np.loadtxt(self.edge_files[idx], delimiter=',', dtype=int)
-
+        points = np.loadtxt(self.point_files[idx], delimiter=',')
+        edges = np.loadtxt(self.edge_files[idx], delimiter=',')
+    
         N = points.shape[0]
         adj = np.zeros((N, N), dtype=np.float32)
 
-        for a, b in edges:
-            adj[a-1, b-1] = 1
-            adj[b-1, a-1] = 1  # undirected
+        for edge in edges:
+            x1, y1, x2, y2 = edge
+            # Find indices of points that match these coords
+            idx1 = np.where(np.all(np.isclose(points, [x1, y1], atol=1e-6), axis=1))[0][0]
+            idx2 = np.where(np.all(np.isclose(points, [x2, y2], atol=1e-6), axis=1))[0][0]
+
+            adj[idx1, idx2] = 1
+            adj[idx2, idx1] = 1  # undirected
 
         # Normalize points
-        mean = points.mean(axis=0)
-        std = points.std(axis=0) + 1e-6
-        points_norm = (points - mean) / std
+        # mean = points.mean(axis=0)
+        # std = points.std(axis=0) + 1e-6
+        # points_norm = (points - mean) / std
+        points_norm = points
 
         # Compute extra features
         dist_to_centroid = ComputeHelpers.compute_distance_to_centroid(points_norm)  # [N,1]
@@ -50,7 +56,8 @@ class EdgeDataset(torch.utils.data.Dataset):
         angles = ComputeHelpers.compute_angle_from_x_axis(points_norm)              # [N,1]
 
         # Combine
-        feats = np.concatenate([points_norm, dist_to_centroid, local_density, angles], axis=1)  # [N,5]
+        #feats = np.concatenate([points_norm, dist_to_centroid, local_density, angles], axis=1)  # [N,5]
+        feats = np.concatenate([points_norm], axis=1)
 
         return (
         torch.tensor(feats, dtype=torch.float32),
@@ -94,9 +101,9 @@ def train(export_type="pytorch"):
     model = PointTransformModelDefinition.EdgePredictor().cuda()
 
     # Diagnostic check
-    for name, param in model.named_parameters():
-        if not param.is_cuda:
-            print(f"[DEBUG] {name} is on CPU!")
+    # for name, param in model.named_parameters():
+    #     if not param.is_cuda:
+    #         print(f"[DEBUG] {name} is on CPU!")
 
     optimizer = optim.Adam(model.parameters(), lr=Learning_Rate)
     loss_fn = nn.BCELoss()

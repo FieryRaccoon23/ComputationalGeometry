@@ -4,7 +4,7 @@ import torch
 # Model definition
 # ============================
 class EdgePredictor(torch.nn.Module):
-    def __init__(self, dim=64, input_dim=5):
+    def __init__(self, dim=64, input_dim=2):
         super().__init__()
         self.input_proj = torch.nn.Linear(input_dim, dim)
         self.layer1 = PointTransformerLayer(dim=dim, pos_mlp_hidden_dim=64)

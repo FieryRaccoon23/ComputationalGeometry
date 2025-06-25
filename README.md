@@ -11,9 +11,9 @@ Using CGAL to generate data and training to create Delaunay triangulation.
 7) Get PointTransformerLayer model
 
 ## How to
-1) Run ./run_cmake to create make files
+1) Run ./run_cmake to create make files (first parameter training/inference, second parameter release/debug)
 2) Run ./make.sh to build
-3) Run the application in build folder by running ./build/app
+3) Run the application in build folder by running ./build_training/app
 4) Cleanup build folder using the command ./clean_build.sh and ./clean_data.sh to clean data folder
 
 ## License
