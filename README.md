@@ -8,7 +8,7 @@ Using CGAL to generate data and training to create Delaunay triangulation.
 4) Download libtorch for C++ (change the CMakeList.txt file depending on the version of libtorch)
 5) All data goes into data folder. Folder data/csv contains the csv files for points and edges. Folder data/mesh contains the mesh
 6) Install pytorch
-7) Get PointTransformerLayer model
+7) Get PointTransformerLayer model: https://github.com/lucidrains/point-transformer-pytorch
 
 ## How to
 1) Run ./run_cmake to create make files (first parameter training/inference, second parameter release/debug)
