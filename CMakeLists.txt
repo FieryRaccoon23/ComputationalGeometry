@@ -48,6 +48,11 @@ find_package(Torch REQUIRED)
 # include openvoronoi
 include_directories("/usr/local/include/openvoronoi")
 
+find_library(OPENVORONOI_LIB openvoronoi HINTS /usr/local/lib/openvoronoi)
+if(NOT OPENVORONOI_LIB)
+  message(FATAL_ERROR "OpenVoronoi library not found")
+endif()
+
 # Creating entries for all C++ files with "main" routine
 # ##########################################################
 
@@ -89,8 +94,7 @@ target_link_libraries(app "${TORCH_LIBRARIES}")
 set_property(TARGET app PROPERTY CXX_STANDARD 17)
 
 # Link OpenVoronoi
-link_directories("/usr/local/lib")
-target_link_libraries(app openvoronoi)
+target_link_libraries(app ${OPENVORONOI_LIB})
 
 set_target_properties(app PROPERTIES
     CUDA_SEPARABLE_COMPILATION ON
