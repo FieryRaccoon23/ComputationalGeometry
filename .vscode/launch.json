@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) Debug Launch",
+            "name": "(gdb) Debug Training Skeletonization",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/buildDebug/app",
+            "program": "${workspaceFolder}/buildDebug_training/Skeletonization/app",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
