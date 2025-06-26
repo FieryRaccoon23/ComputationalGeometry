@@ -10,6 +10,16 @@
 #include "EdgeData.h"
 #include "MeshFileReader.h"
 
+// #include "medial_axis_filter.hpp"
+// #include "medial_axis_walk.hpp"
+// #include "voronoidiagram.hpp"
+// #include "polygon_interior_filter.hpp"
+
+// void GenerateVoronoiDiagram()
+// {
+//     ovd::VoronoiDiagram* vd = new ovd::VoronoiDiagram(1,100); 
+// }
+
 void FindBoundaryEdges(const std::string& filename, std::set<EdgeData>& outEdges)
 {
     std::vector<EdgeData> allEdges;

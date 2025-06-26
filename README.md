@@ -9,6 +9,7 @@ Using CGAL to generate data and training to create Delaunay triangulation.
 5) All data goes into data folder. Folder data/csv contains the csv files for points and edges. Folder data/mesh contains the mesh
 6) Install pytorch
 7) Get PointTransformerLayer model: https://github.com/lucidrains/point-transformer-pytorch
+8) Download OpenVoronoi: https://github.com/aewallin/openvoronoi (make sure you disable every python requirement in the make file, when running its cmake, run like this: cmake -DBUILD_PYTHON_MODULE=OFF -DBUILD_CPP_TESTS=OFF ../src)
 
 ## How to
 1) Run ./run_cmake "project name" to create make files (first parameter folder name like DelaunayTriangulation, second parameter is training/inference, third parameter release/debug)

@@ -45,6 +45,9 @@ include_directories(${EIGEN3_INCLUDE_DIR})
 set(CMAKE_PREFIX_PATH "${TORCH_DIR}")
 find_package(Torch REQUIRED)
 
+# include openvoronoi
+include_directories("/usr/local/include/openvoronoi")
+
 # Creating entries for all C++ files with "main" routine
 # ##########################################################
 
@@ -84,6 +87,10 @@ target_include_directories(app PRIVATE ${EIGEN3_INCLUDE_DIR})
 target_include_directories(app PRIVATE ${TORCH_INCLUDE_DIRS})
 target_link_libraries(app "${TORCH_LIBRARIES}")
 set_property(TARGET app PROPERTY CXX_STANDARD 17)
+
+# Link OpenVoronoi
+link_directories("/usr/local/lib")
+target_link_libraries(app openvoronoi)
 
 set_target_properties(app PROPERTIES
     CUDA_SEPARABLE_COMPILATION ON
