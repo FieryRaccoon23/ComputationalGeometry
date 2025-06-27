@@ -17,14 +17,14 @@
 
 namespace SimpleVoronoi2D
 {
-    void GenerateVoronoi2D(const std::map<int, PointData>& points)
+    void GenerateVoronoi2D(const std::vector<PointData>& points)
     {
         ovd::VoronoiDiagram* vd = new ovd::VoronoiDiagram(TOLERANCE1, TOLERANCE2);
 
         std::vector<int> vertexIds;
-        for (const auto& [pointId, pointCoordinate] : points) 
+        for (const auto& point : points) 
         {
-            ovd::Point p = ovd::Point(pointCoordinate.mX, pointCoordinate.mY);
+            ovd::Point p = ovd::Point(point.mX, point.mY);
             vertexIds.push_back( vd->insert_point_site(p) );   
         }
 

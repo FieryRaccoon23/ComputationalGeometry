@@ -6,6 +6,7 @@
 #include <sstream>
 
 #include "EdgeData.h"
+#include "PointData.h"
 
 namespace MeshFileReader
 {
@@ -15,7 +16,7 @@ namespace MeshFileReader
             [](unsigned char ch) { return ch != '\r' && ch != '\n'; }).base(), s.end());
     }
 
-    void ExtractEdgesFromMesh(const std::string& filename, std::vector<EdgeData>& outEdges) 
+    void ExtractEdgesAndPointsFromMesh(const std::string& filename, std::map<int, PointData>& outPoints, std::vector<EdgeData>& outEdges) 
     {
         std::ifstream infile(filename);
         std::string line;
@@ -29,7 +30,12 @@ namespace MeshFileReader
                 std::getline(infile, line);
                 num_nodes = std::stoi(line);
                 for (int i = 0; i < num_nodes; ++i) {
-                    std::getline(infile, line);  // skip node lines
+                    std::getline(infile, line);
+                    std::istringstream iss(line);
+                    int id;
+                    float x,y,z;
+                    iss >> id >> x >> y >> z;
+                    outPoints.insert(std::make_pair(id, PointData(id, x, y)));
                 }
             }
 
@@ -51,6 +57,11 @@ namespace MeshFileReader
                 }
             }
         }
+
+    }
+
+    void ExtractPointsFromMesh(const std::string& filename, std::set<PointData>& outPoints)
+    {
 
     }
 }

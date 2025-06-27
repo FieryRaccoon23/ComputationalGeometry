@@ -2,11 +2,13 @@
 
 #include <fstream>
 #include <vector>
+#include <map>
 
 class EdgeData;
+class PointData;
 
 namespace MeshFileReader
 {
     void TrimFromEnd(std::string &s);
-    void ExtractEdgesFromMesh(const std::string& filename, std::vector<EdgeData>& outEdges);
+    void ExtractEdgesAndPointsFromMesh(const std::string& filename, std::map<int, PointData>& outPoints, std::vector<EdgeData>& outEdges);
 }

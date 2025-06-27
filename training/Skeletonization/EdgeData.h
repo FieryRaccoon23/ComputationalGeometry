@@ -3,11 +3,16 @@
 class EdgeData
 {
 public:
-    EdgeData(){}
+    EdgeData()
+    {
+        mAddedToMeshLoop = false;
+    }
+    
     EdgeData(int start, int end):
     mStart(start),
     mEnd(end)
     {
+        mAddedToMeshLoop = false;
     }
 
     EdgeData& operator=(const EdgeData& other)
@@ -35,4 +40,6 @@ public:
     // mStart will be less than mEnd
     int mStart = -1;
     int mEnd = -1;
+
+    bool mAddedToMeshLoop = false;
 };
