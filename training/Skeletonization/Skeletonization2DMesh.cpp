@@ -8,17 +8,14 @@
 #include <torch/script.h>
 
 #include "EdgeData.h"
+#include "PointData.h"
 #include "MeshFileReader.h"
+#include "SimpleVoronoi2D.h"
 
-// #include "medial_axis_filter.hpp"
-// #include "medial_axis_walk.hpp"
-// #include "voronoidiagram.hpp"
-// #include "polygon_interior_filter.hpp"
-
-// void GenerateVoronoiDiagram()
-// {
-//     ovd::VoronoiDiagram* vd = new ovd::VoronoiDiagram(1,100); 
-// }
+void GenerateVoronoiDiagram(const std::map<int, PointData>& points)
+{
+    SimpleVoronoi2D::GenerateVoronoi2D(points);
+}
 
 void FindBoundaryEdges(const std::string& filename, std::set<EdgeData>& outEdges)
 {
@@ -45,11 +42,26 @@ void FindBoundaryEdges(const std::string& filename, std::set<EdgeData>& outEdges
     }
 }
 
+void GetPointsFromBoundaryEdges(std::set<EdgeData>& edges, std::map<int, PointData> outPoint)
+{
+    int id = 1;
+    for(const auto& e : edges)
+    {
+        outPoint.insert(std::make_pair(id, PointData(id, e.mStart, e.mEnd)));
+        ++id;
+    }
+}
+
 int main(int argc, char* argv[])
 {
     std::set<EdgeData> edges;
 
     FindBoundaryEdges("./data/SkeletonizationTrainingData/rectangle.msh", edges);
+
+    std::map<int, PointData> points;
+    GetPointsFromBoundaryEdges(edges, points);
+
+    GenerateVoronoiDiagram(points);
 
     return 0;
 }

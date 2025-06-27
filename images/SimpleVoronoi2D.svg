@@ -1,0 +1,22 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1024px" height="1024px" xmlns="http://www.w3.org/2000/svg" version="1.1" >
+	<polyline points="500,524 500,1274 " fill="none" stroke-width="1" stroke="rgb(0,0,255)" />
+	<polyline points="500,1274 500,9524 " fill="none" stroke-width="1" stroke="rgb(0,0,255)" />
+	<polyline points="500,9524 8294.23,-3976 " fill="none" stroke-width="1" stroke="rgb(255,165,0)" />
+	<polyline points="8294.23,-3976 1149.52,149 " fill="none" stroke-width="1" stroke="rgb(0,0,255)" />
+	<polyline points="1149.52,149 500,524 " fill="none" stroke-width="1" stroke="rgb(0,0,255)" />
+	<polyline points="500,524 1149.52,149 " fill="none" stroke-width="1" stroke="rgb(0,0,255)" />
+	<polyline points="1149.52,149 8294.23,-3976 " fill="none" stroke-width="1" stroke="rgb(0,0,255)" />
+	<polyline points="8294.23,-3976 -7294.23,-3976 " fill="none" stroke-width="1" stroke="rgb(255,165,0)" />
+	<polyline points="-7294.23,-3976 -149.519,149 " fill="none" stroke-width="1" stroke="rgb(0,0,255)" />
+	<polyline points="-149.519,149 500,524 " fill="none" stroke-width="1" stroke="rgb(0,0,255)" />
+	<polyline points="500,524 -149.519,149 " fill="none" stroke-width="1" stroke="rgb(0,0,255)" />
+	<polyline points="-149.519,149 -7294.23,-3976 " fill="none" stroke-width="1" stroke="rgb(0,0,255)" />
+	<polyline points="-7294.23,-3976 500,9524 " fill="none" stroke-width="1" stroke="rgb(255,165,0)" />
+	<polyline points="500,9524 500,1274 " fill="none" stroke-width="1" stroke="rgb(0,0,255)" />
+	<polyline points="500,1274 500,524 " fill="none" stroke-width="1" stroke="rgb(0,0,255)" />
+	<circle cx="500" cy="-976" r="0.05" fill="rgb(100,200,120)" stroke-width="0.01" stroke="rgb(200,250,150)" />
+	<circle cx="-799.038" cy="1274" r="0.05" fill="rgb(100,200,120)" stroke-width="0.01" stroke="rgb(200,250,150)" />
+	<circle cx="1799.04" cy="1274" r="0.05" fill="rgb(100,200,120)" stroke-width="0.01" stroke="rgb(200,250,150)" />
+</svg>
