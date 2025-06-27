@@ -12,10 +12,12 @@
 #include "MeshFileReader.h"
 #include "SimpleVoronoi2D.h"
 
-bool IsColinear(const PointData& A, const PointData& B, const PointData& C, float epsilon = 1e-6f) 
+#define EPSILON 1e-6f
+
+bool IsColinear(const PointData& A, const PointData& B, const PointData& C) 
 {
     float area = (A.mX * (B.mY - C.mY)) + (B.mX * (C.mY - A.mY)) + (C.mX * (A.mY - B.mY));
-    return std::fabs(area) < epsilon;
+    return std::fabs(area) < EPSILON;
 }
 
 void RemoveColinearPoints(const std::vector<PointData>& input, std::vector<PointData>& outPoints) 
@@ -41,6 +43,24 @@ void RemoveColinearPoints(const std::vector<PointData>& input, std::vector<Point
     for(const auto& p : outPoints)
     {
         std::cout << p.mId << ", " << p.mX << ", " << p.mY << std::endl;
+    }
+}
+
+void RemoveDuplicatePoints(const std::vector<PointData>& input, std::vector<PointData>& outPoints) 
+{
+    std::unordered_set<std::string> seen;
+
+    for (const auto& pt : input) {
+        // Round coordinates to fixed precision to avoid float inaccuracies
+        int xKey = static_cast<int>(std::round(pt.mX / EPSILON));
+        int yKey = static_cast<int>(std::round(pt.mY / EPSILON));
+        std::string key = std::to_string(xKey) + "_" + std::to_string(yKey);
+
+        if (seen.find(key) == seen.end()) 
+        {
+            outPoints.push_back(pt);
+            seen.insert(key);
+        }
     }
 }
 
@@ -221,10 +241,13 @@ int main(int argc, char* argv[])
     std::set<EdgeData> edges;
     std::vector<PointData> points;
 
-    FindBoundaryEdgesAndPoints("./data/SkeletonizationTrainingData/my_mesh.msh", points, edges);
+    FindBoundaryEdgesAndPoints("./data/SkeletonizationTrainingData/t-shaped.msh", points, edges);
+
+    std::vector<PointData> uniquePoints;
+    RemoveDuplicatePoints(points, uniquePoints);
 
     std::vector<PointData> cleanedPoints;
-    RemoveColinearPoints(points, cleanedPoints);
+    RemoveColinearPoints(uniquePoints, cleanedPoints);
 
     SimpleVoronoi2D::GenerateVoronoi2D(cleanedPoints);
 
