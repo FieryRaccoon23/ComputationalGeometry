@@ -1,8 +1,15 @@
 #!/bin/bash
 
+# Color definitions
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
+
 FOLDER=${1:-}                        # e.g., DelaunayTriangulation
-BUILD_MODE=${2:-training}            # training (default) or inference
-BUILD_TYPE_INPUT=${3:-release}       # release (default) or debug
+BUILD_MODE=${2:-training}           # training (default) or inference
+BUILD_TYPE_INPUT=${3:-release}      # release (default) or debug
 
 # Normalize inputs
 BUILD_MODE=$(echo "$BUILD_MODE" | tr '[:upper:]' '[:lower:]')
@@ -15,12 +22,17 @@ else
   BUILD_FOLDER="build_${BUILD_MODE}/$FOLDER"
 fi
 
-echo "🏗️  Running make in: $BUILD_FOLDER"
+echo -e "${CYAN}🏗️  Running make in: $BUILD_FOLDER${NC}"
 
 if [[ -d "$BUILD_FOLDER" ]]; then
-  make -C "$BUILD_FOLDER"
-  echo "✅ Make completed in: $BUILD_FOLDER"
+  if make -C "$BUILD_FOLDER"; then
+    echo -e "${GREEN}✅ Make completed successfully in: $BUILD_FOLDER${NC}"
+  else
+    echo -e "${RED}❌ Make failed in: $BUILD_FOLDER${NC}"
+    exit 1
+  fi
 else
-  echo "❌ Build folder does not exist: $BUILD_FOLDER"
-  echo "⚠️  Please run the generation script first!"
+  echo -e "${RED}❌ Build folder does not exist: $BUILD_FOLDER${NC}"
+  echo -e "${YELLOW}⚠️  Please run the generation script first!${NC}"
+  exit 1
 fi
