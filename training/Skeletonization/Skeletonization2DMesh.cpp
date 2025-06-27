@@ -11,6 +11,9 @@
 #include "PointData.h"
 #include "MeshFileReader.h"
 #include "SimpleVoronoi2D.h"
+#include "TrainUsingVoronoiDiagram.h"
+
+#include "voronoidiagram.hpp"
 
 #define EPSILON 1e-6f
 
@@ -249,7 +252,8 @@ int main(int argc, char* argv[])
     std::vector<PointData> cleanedPoints;
     RemoveColinearPoints(uniquePoints, cleanedPoints);
 
-    SimpleVoronoi2D::GenerateVoronoi2D(cleanedPoints);
+    const ovd::VoronoiDiagram* vd = SimpleVoronoi2D::GenerateVoronoi2D(cleanedPoints);
+    Training::GenerateTrainingDataFromVoronoi(vd);
 
     return 0;
 }

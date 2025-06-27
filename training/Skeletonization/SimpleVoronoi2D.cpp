@@ -17,7 +17,7 @@
 
 namespace SimpleVoronoi2D
 {
-    void GenerateVoronoi2D(const std::vector<PointData>& points)
+    const ovd::VoronoiDiagram* GenerateVoronoi2D(const std::vector<PointData>& points)
     {
         ovd::VoronoiDiagram* vd = new ovd::VoronoiDiagram(TOLERANCE1, TOLERANCE2);
 
@@ -40,6 +40,6 @@ namespace SimpleVoronoi2D
 
         std::cout << vd->print();
         vd2svg("SimpleVoronoi2D.svg", vd);
-        delete vd;
+        return vd;
     }
 }

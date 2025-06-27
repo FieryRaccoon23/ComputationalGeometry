@@ -5,7 +5,12 @@
 class EdgeData;
 class PointData;
 
+namespace ovd 
+{
+    class VoronoiDiagram;
+}
+
 namespace SimpleVoronoi2D
 {
-    void GenerateVoronoi2D(const std::vector<PointData>& points);
+    const ovd::VoronoiDiagram* GenerateVoronoi2D(const std::vector<PointData>& points);
 }
